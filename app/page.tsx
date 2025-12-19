@@ -1,5 +1,5 @@
 import { DeployButton } from "@/components/deploy-button";
-import { AuthButton } from "@/components/auth-button";
+import { AuthButton } from "@/features/auth/components/auth-button";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 import { hasEnvVars } from "@/lib/utils";
 import Link from "next/link";
