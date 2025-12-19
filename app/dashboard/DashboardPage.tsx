@@ -71,11 +71,11 @@ export default function DashboardPage() {
                     </div>
 
                     {/* Continue Learning Section */}
-                    <Card className="p-6 border-accent/20 bg-gradient-to-br from-accent/5 to-accent/10">
+                    <div className="p-6 rounded-xl border border-accent/20 bg-gradient-to-br from-accent/5 to-accent/10 shadow">
                         <div className="flex items-start justify-between gap-4">
                             <div className="flex-1 space-y-3">
                                 <div className="flex items-center gap-2">
-                                    <div className="h-8 w-8 rounded-md bg-accent/20 flex items-center justify-center">
+                                    <div className="h-8 w-8 rounded-md bg-accent/20 border border-accent flex items-center justify-center">
                                         <Play className="h-4 w-4 text-accent" />
                                     </div>
                                     <span className="text-sm font-medium text-accent">Continuar aprendiendo</span>
@@ -91,7 +91,7 @@ export default function DashboardPage() {
                                 Reanudar
                             </Button>
                         </div>
-                    </Card>
+                    </div>
 
                     {/* Weekly Progress Summary */}
                     <div className="grid gap-4 md:grid-cols-3">
