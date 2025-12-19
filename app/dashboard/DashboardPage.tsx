@@ -7,37 +7,8 @@ import { Button } from "@/components/ui/button"
 import { BookOpen, Clock, TrendingUp, Play } from "lucide-react"
 import AppSidebar from "@/components/AppSidebar"
 import { useEffect, useState } from "react"
-
-// Mock data - will be replaced with real data
-const mockPaths = [
-    {
-        id: 1,
-        title: "Full-Stack Web Development",
-        objective: "Master React, Node.js, and PostgreSQL",
-        progress: 67,
-        modulesCompleted: 8,
-        modulesTotal: 12,
-        timeRemaining: 14,
-    },
-    {
-        id: 2,
-        title: "System Design Fundamentals",
-        objective: "Learn scalable architecture patterns",
-        progress: 34,
-        modulesCompleted: 5,
-        modulesTotal: 15,
-        timeRemaining: 28,
-    },
-    {
-        id: 3,
-        title: "TypeScript Deep Dive",
-        objective: "Advanced type system mastery",
-        progress: 89,
-        modulesCompleted: 16,
-        modulesTotal: 18,
-        timeRemaining: 3,
-    },
-]
+import { useFetchLearningPaths } from "@/features/learning_paths/useFetchLearningPaths"
+import { Skeleton } from "@/components/ui/skeleton"
 
 const nextResource = {
     title: "Building REST APIs with Express",
@@ -54,10 +25,13 @@ const weeklyStats = {
 
 export default function DashboardPage() {
     const [greeting, setGreeting] = useState("Buenos días")
+    const { getAllLearningPaths, paths, loading, error } = useFetchLearningPaths()
 
     useEffect(() => {
         const currentHour = new Date().getHours()
         setGreeting(currentHour < 12 ? "Buenos días" : "Buenas tardes")
+
+        getAllLearningPaths()
     }, [])
 
     return (
@@ -125,17 +99,14 @@ export default function DashboardPage() {
                         </div>
 
                         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                            {mockPaths.map((path) => (
+                            {paths.map((path) => (
                                 <PathCard
                                     key={path.id}
                                     title={path.title}
-                                    description={path.objective}
-                                    progress={path.progress}
-                                    modulesCompleted={path.modulesCompleted}
-                                    modulesTotal={path.modulesTotal}
-                                    timeRemaining={`${path.timeRemaining}h`}
+                                    description={path.description ?? ""}
                                 />
-                            ))}
+                            ))
+                            }
                         </div>
                     </div>
                 </div>

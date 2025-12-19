@@ -4,10 +4,10 @@ import { cn } from "@/lib/utils"
 interface PathCardProps {
     title: string
     description: string
-    progress: number
-    modulesCompleted: number
-    modulesTotal: number
-    timeRemaining: string
+    progress?: number
+    modulesCompleted?: number
+    modulesTotal?: number
+    timeRemaining?: string
     onClick?: () => void
 }
 
