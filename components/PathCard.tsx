@@ -37,7 +37,7 @@ export function PathCard({
 
                 <div className="space-y-2">
                     <div className="flex items-center justify-between text-sm">
-                        <span className="text-muted-foreground">Progress</span>
+                        <span className="text-muted-foreground">Progreso</span>
                         <span className="font-medium">{progress}%</span>
                     </div>
                     {/* <Progress value={progress} className="h-2" /> */}
@@ -45,9 +45,9 @@ export function PathCard({
 
                 <div className="flex items-center justify-between text-sm text-muted-foreground">
                     <span>
-                        {modulesCompleted} / {modulesTotal} modules
+                        {modulesCompleted} / {modulesTotal} módulos
                     </span>
-                    <span>{timeRemaining} left</span>
+                    <span>{timeRemaining} restantes</span>
                 </div>
             </div>
         </Card>

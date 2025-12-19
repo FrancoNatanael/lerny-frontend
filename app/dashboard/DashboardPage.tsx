@@ -6,6 +6,7 @@ import { InfoCard } from "@/components/InfoCard"
 import { Button } from "@/components/ui/button"
 import { BookOpen, Clock, TrendingUp, Play } from "lucide-react"
 import AppSidebar from "@/components/AppSidebar"
+import { useEffect, useState } from "react"
 
 // Mock data - will be replaced with real data
 const mockPaths = [
@@ -16,7 +17,7 @@ const mockPaths = [
         progress: 67,
         modulesCompleted: 8,
         modulesTotal: 12,
-        timeRemaining: "14 hours",
+        timeRemaining: 14,
     },
     {
         id: 2,
@@ -25,7 +26,7 @@ const mockPaths = [
         progress: 34,
         modulesCompleted: 5,
         modulesTotal: 15,
-        timeRemaining: "28 hours",
+        timeRemaining: 28,
     },
     {
         id: 3,
@@ -34,14 +35,14 @@ const mockPaths = [
         progress: 89,
         modulesCompleted: 16,
         modulesTotal: 18,
-        timeRemaining: "3 hours",
+        timeRemaining: 3,
     },
 ]
 
 const nextResource = {
     title: "Building REST APIs with Express",
     type: "Video",
-    duration: "45 min",
+    duration: 45,
     pathTitle: "Full-Stack Web Development",
 }
 
@@ -52,8 +53,12 @@ const weeklyStats = {
 }
 
 export default function DashboardPage() {
-    // const currentHour = new Date().getHours()
-    const greeting = "Good morning"
+    const [greeting, setGreeting] = useState("Buenos días")
+
+    useEffect(() => {
+        const currentHour = new Date().getHours()
+        setGreeting(currentHour < 12 ? "Buenos días" : "Buenas tardes")
+    }, [])
 
     return (
         <div className="">
@@ -62,7 +67,7 @@ export default function DashboardPage() {
                     {/* Header */}
                     <div className="space-y-2">
                         <h1 className="text-3xl font-bold text-balance">{greeting}, Franco</h1>
-                        <p className="text-muted-foreground leading-relaxed">Ready to continue your learning journey?</p>
+                        <p className="text-muted-foreground leading-relaxed">Listo para continuar tu viaje de aprendizaje?</p>
                     </div>
 
                     {/* Continue Learning Section */}
@@ -73,7 +78,7 @@ export default function DashboardPage() {
                                     <div className="h-8 w-8 rounded-md bg-accent/20 flex items-center justify-center">
                                         <Play className="h-4 w-4 text-accent" />
                                     </div>
-                                    <span className="text-sm font-medium text-accent">Continue Learning</span>
+                                    <span className="text-sm font-medium text-accent">Continuar aprendiendo</span>
                                 </div>
                                 <div>
                                     <h3 className="text-xl font-semibold mb-1">{nextResource.title}</h3>
@@ -83,7 +88,7 @@ export default function DashboardPage() {
                                 </div>
                             </div>
                             <Button size="lg" className="shrink-0">
-                                Resume
+                                Reanudar
                             </Button>
                         </div>
                     </Card>
@@ -93,19 +98,19 @@ export default function DashboardPage() {
                         <InfoCard
                             icon={Clock}
                             value={`${weeklyStats.hoursStudied}h`}
-                            label="This week"
+                            label="Semana actual"
                             variant="primary"
                         />
                         <InfoCard
                             icon={TrendingUp}
-                            value={`${weeklyStats.streak} days`}
-                            label="Current streak"
+                            value={`${weeklyStats.streak} días`}
+                            label="Racha actual"
                             variant="accent"
                         />
                         <InfoCard
                             icon={BookOpen}
                             value={`+${weeklyStats.progressVsLastWeek}%`}
-                            label="vs last week"
+                            label="Vs semana pasada"
                             variant="chart-3"
                         />
                     </div>
@@ -113,9 +118,9 @@ export default function DashboardPage() {
                     {/* Active Learning Paths */}
                     <div className="space-y-4">
                         <div className="flex items-center justify-between">
-                            <h2 className="text-2xl font-semibold">Active Learning Paths</h2>
+                            <h2 className="text-2xl font-semibold">Rutas de aprendizaje activas</h2>
                             <Button variant="outline" size="sm">
-                                View All
+                                Ver todas
                             </Button>
                         </div>
 
@@ -128,7 +133,7 @@ export default function DashboardPage() {
                                     progress={path.progress}
                                     modulesCompleted={path.modulesCompleted}
                                     modulesTotal={path.modulesTotal}
-                                    timeRemaining={path.timeRemaining}
+                                    timeRemaining={`${path.timeRemaining}h`}
                                 />
                             ))}
                         </div>
