@@ -9,6 +9,7 @@ import AppSidebar from "@/components/AppSidebar"
 import { useEffect, useState } from "react"
 import { useFetchLearningPaths } from "@/features/learning_paths/useFetchLearningPaths"
 import { Skeleton } from "@/components/ui/skeleton"
+import Link from "next/link"
 
 const nextResource = {
     title: "Building REST APIs with Express",
@@ -38,13 +39,11 @@ export default function DashboardPage() {
         <div className="">
             <main className="flex-1 p-6 md:p-8 lg:p-12 md:ml-64">
                 <div className="max-w-7xl mx-auto space-y-8">
-                    {/* Header */}
                     <div className="space-y-2">
                         <h1 className="text-3xl font-bold text-balance">{greeting}, Franco</h1>
                         <p className="text-muted-foreground leading-relaxed">Listo para continuar tu viaje de aprendizaje?</p>
                     </div>
 
-                    {/* Continue Learning Section */}
                     <div className="p-6 rounded-xl border border-accent/20 bg-gradient-to-br from-accent/5 to-accent/10 shadow">
                         <div className="flex items-start justify-between gap-4">
                             <div className="flex-1 space-y-3">
@@ -67,7 +66,6 @@ export default function DashboardPage() {
                         </div>
                     </div>
 
-                    {/* Weekly Progress Summary */}
                     <div className="grid gap-4 md:grid-cols-3">
                         <InfoCard
                             icon={Clock}
@@ -89,23 +87,33 @@ export default function DashboardPage() {
                         />
                     </div>
 
-                    {/* Active Learning Paths */}
                     <div className="space-y-4">
                         <div className="flex items-center justify-between">
                             <h2 className="text-2xl font-semibold">Rutas de aprendizaje activas</h2>
-                            <Button variant="outline" size="sm">
-                                Ver todas
-                            </Button>
+                            <Link href="/dashboard/paths">
+                                <Button variant="outline" size="sm">
+                                    Ver todas
+                                </Button>
+                            </Link>
                         </div>
 
+
                         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                            {paths.map((path) => (
-                                <PathCard
-                                    key={path.id}
-                                    title={path.title}
-                                    description={path.description ?? ""}
-                                />
-                            ))
+                            {
+                                loading ? (
+                                    <>
+                                        <Skeleton className="h-48 p-6 bg-card shadow" />
+                                        <Skeleton className="h-48 p-6 bg-card shadow" />
+                                        <Skeleton className="h-48 p-6 bg-card shadow" />
+                                    </>
+                                ) : (
+                                    paths.map((path) => (
+                                        <PathCard
+                                            key={path.id}
+                                            title={path.title}
+                                            description={path.description ?? ""}
+                                        />
+                                    )))
                             }
                         </div>
                     </div>

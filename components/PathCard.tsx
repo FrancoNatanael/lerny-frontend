@@ -35,20 +35,26 @@ export function PathCard({
                     </p>
                 </div>
 
-                <div className="space-y-2">
-                    <div className="flex items-center justify-between text-sm">
-                        <span className="text-muted-foreground">Progreso</span>
-                        <span className="font-medium">{progress}%</span>
+                {(progress !== undefined && progress !== null) && (
+                    <div className="space-y-2">
+                        <div className="flex items-center justify-between text-sm">
+                            <span className="text-muted-foreground">Progreso</span>
+                            <span className="font-medium">{progress}%</span>
+                        </div>
+                        {/* <Progress value={progress} className="h-2" /> */}
                     </div>
-                    {/* <Progress value={progress} className="h-2" /> */}
-                </div>
+                )}
 
-                <div className="flex items-center justify-between text-sm text-muted-foreground">
-                    <span>
-                        {modulesCompleted} / {modulesTotal} módulos
-                    </span>
-                    <span>{timeRemaining} restantes</span>
-                </div>
+                {(modulesCompleted !== undefined && modulesTotal !== undefined && modulesTotal > 0) && (
+                    <div className="flex items-center justify-between text-sm text-muted-foreground">
+                        <span>
+                            {modulesCompleted} / {modulesTotal} módulos
+                        </span>
+                        {timeRemaining && timeRemaining !== "--" && (
+                            <span>{timeRemaining} restantes</span>
+                        )}
+                    </div>
+                )}
             </div>
         </Card>
     )
