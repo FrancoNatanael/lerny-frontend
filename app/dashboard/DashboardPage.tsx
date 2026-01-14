@@ -110,6 +110,7 @@ export default function DashboardPage() {
                                     paths.map((path) => (
                                         <PathCard
                                             key={path.id}
+                                            id={path.id}
                                             title={path.title}
                                             description={path.description ?? ""}
                                         />

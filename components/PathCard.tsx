@@ -1,7 +1,9 @@
 import { Card } from "@/components/ui/card"
 import { cn } from "@/lib/utils"
+import Link from "next/link"
 
 interface PathCardProps {
+    id: number
     title: string
     description: string
     progress?: number
@@ -12,6 +14,7 @@ interface PathCardProps {
 }
 
 export function PathCard({
+    id,
     title,
     description,
     progress,
@@ -20,14 +23,14 @@ export function PathCard({
     timeRemaining,
     onClick
 }: PathCardProps) {
-    return (
+    const cardContent = (
         <Card
-            className="p-6 hover:border-primary/50 transition-colors cursor-pointer group text-left"
+            className="p-8 hover:shadow-lg transition-shadow duration-200 cursor-pointer group text-left border-border/50"
             onClick={onClick}
         >
             <div className="space-y-4">
                 <div>
-                    <h3 className="font-semibold text-base mb-1 group-hover:text-primary transition-colors">
+                    <h3 className="font-semibold text-lg mb-2 group-hover:text-primary transition-colors leading-tight">
                         {title}
                     </h3>
                     <p className="text-sm text-muted-foreground leading-relaxed">
@@ -57,5 +60,17 @@ export function PathCard({
                 )}
             </div>
         </Card>
+    )
+
+    // If onClick is provided, use it directly without Link
+    if (onClick) {
+        return cardContent
+    }
+
+    // Otherwise, wrap in Link for navigation
+    return (
+        <Link href={`/dashboard/paths/${id}`} className="block">
+            {cardContent}
+        </Link>
     )
 }

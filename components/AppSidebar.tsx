@@ -1,8 +1,12 @@
+
+"use client"
 import { cn } from "@/lib/utils";
 import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupAction, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "./ui/sidebar";
 import { Home, Inbox } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function AppSidebar() {
+    const router = useRouter()
     const items = [
         {
             title: "Dashboard",
@@ -19,7 +23,9 @@ export default function AppSidebar() {
     return (
         <Sidebar className="w-64 flex flex-col h-full px-4 py-6">
             <SidebarHeader className="mb-6">
-                <SidebarGroupLabel>
+                <SidebarGroupLabel
+                    onClick={() => { router.push("/dashboard") }}
+                    className="cursor-pointer hover:bg-sidebar-hover">
                     <div className="">
                         <h1 className="text-2xl font-bold">
                             Lerny
